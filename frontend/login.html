@@ -151,29 +151,7 @@
         <p id="message"></p>
     </div>
 
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event){
-            event.preventDefault();
-            
-            var identifier = document.getElementById("identifier").value;
-            var password = document.getElementById("password").value;
-            var message = document.getElementById("message");
-
-            // Hardcoded values for both username and email for login
-            var validUsername = "admin";
-            var validEmail = "admin@example.com";
-            var validPassword = "1234";
-
-            // Check if the identifier matches either the username or email and if the password is correct
-            if ((identifier === validUsername || identifier === validEmail) && password === validPassword) {
-                message.style.color = "green";
-                message.textContent = "Login successful!";
-            } else {
-                message.style.color = "red";
-                message.textContent = "Invalid username, email, or password!";
-            }
-        });
-    </script>
+   
 </body>
 </html>
 
