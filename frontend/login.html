@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Animated Login Page</title>
     <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -12,44 +19,99 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
         .login-container {
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeIn 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .input-group {
             margin-bottom: 15px;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: inputFade 1.5s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes inputFade {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .input-group label {
             display: block;
             margin-bottom: 5px;
+            color: #555;
         }
 
         .input-group input {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: red;
+            outline: none;
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: red;
             color: white;
             border: none;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            animation: buttonFade 1.5s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes buttonFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         button:hover {
@@ -58,8 +120,17 @@
 
         #message {
             text-align: center;
+            margin-top: 15px;
+            opacity: 0;
             color: red;
-            margin-top: 10px;
+            animation: fadeInMessage 1.5s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInMessage {
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -80,4 +151,29 @@
         <p id="message"></p>
     </div>
 
-</body>    
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event){
+            event.preventDefault();
+            
+            var identifier = document.getElementById("identifier").value;
+            var password = document.getElementById("password").value;
+            var message = document.getElementById("message");
+
+            // Hardcoded values for both username and email for login
+            var validUsername = "admin";
+            var validEmail = "admin@example.com";
+            var validPassword = "1234";
+
+            // Check if the identifier matches either the username or email and if the password is correct
+            if ((identifier === validUsername || identifier === validEmail) && password === validPassword) {
+                message.style.color = "green";
+                message.textContent = "Login successful!";
+            } else {
+                message.style.color = "red";
+                message.textContent = "Invalid username, email, or password!";
+            }
+        });
+    </script>
+</body>
+</html>
+
