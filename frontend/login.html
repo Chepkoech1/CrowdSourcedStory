@@ -20,6 +20,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
 
         h2 {
@@ -50,16 +51,31 @@
             border: none;
             cursor: pointer;
             border-radius: 4px;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: red; 
+            background-color: darkred; 
         }
 
         #message {
             text-align: center;
             color: red;
             margin-top: 10px;
+        }
+
+        .register-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .register-container a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .register-container a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -78,6 +94,35 @@
             <button type="submit">Login</button>
         </form>
         <p id="message"></p>
+
+        <!-- Register Link -->
+        <div class="register-container">
+            <p>Don't have an account? <a href="./register.html">Register here</a></p>
+        </div>
     </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const messageElement = document.getElementById('message');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+          
+            const identifier = document.getElementById('identifier').value;
+            const password = document.getElementById('password').value;
+
+            if (identifier === "user@example.com" && password === "password123") {
+                messageElement.style.color = 'green';
+                messageElement.textContent = 'Login successful! Redirecting...';
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html'; 
+                }, 1000);
+            } else {
+                messageElement.style.color = 'red';
+                messageElement.textContent = 'Invalid username or password. Please try again.';
+            }
+        });
+    </script>
 </body>
 </html>
